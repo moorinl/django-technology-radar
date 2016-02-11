@@ -2,7 +2,9 @@ sudo: false
 language: python
 env:
   - TOXENV=py27
-  - TOXENV=py35
+  - TOXENV=py32
+  - TOXENV=py33
+  - TOXENV=py34
   - TOXENV=flake8
 install:
   - pip install tox 
