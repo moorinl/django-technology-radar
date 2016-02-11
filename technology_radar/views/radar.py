@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template import loader
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,33 +10,51 @@ from technology_radar.models import Blip, Radar
 from technology_radar.serializers import BlipSerializer, RadarSerializer
 
 
-__all__ = ['RadarListView', 'RadarDetailView', 'BlipListView',
-           'BlipDetailView']
+__all__ = ['ApiRadarListView', 'ApiRadarDetailView', 'ApiBlipListView',
+           'ApiBlipDetailView', 'index', 'radar_detail']
 
 
-class RadarListView(APIView):
+class ApiRadarListView(APIView):
     def get(self, request, format=None):
-        qs = Radar.objects.all()
-        ser = RadarSerializer(qs, many=True)
-        return Response(ser.data)
+        queryset = Radar.objects.all()
+        serializer = RadarSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
-class RadarDetailView(APIView):
+class ApiRadarDetailView(APIView):
     def get(self, request, pk, format=None):
         obj = get_object_or_404(Radar, pk=pk)
-        ser = RadarSerializer(obj)
-        return Response(ser.data)
+        serializer = RadarSerializer(obj)
+        return Response(serializer.data)
 
 
-class BlipListView(APIView):
+class ApiBlipListView(APIView):
     def get(self, request, format=None):
-        qs = Blip.objects.all()
-        ser = BlipSerializer(qs, many=True)
-        return Response(ser.data)
+        queryset = Blip.objects.all()
+        serializer = BlipSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
-class BlipDetailView(APIView):
+class ApiBlipDetailView(APIView):
     def get(self, request, pk, format=None):
         obj = get_object_or_404(Blip, pk=pk)
-        ser = BlipSerializer(obj)
-        return Response(ser.data)
+        serializer = BlipSerializer(obj)
+        return Response(serializer.data)
+
+
+def index(request):
+    radars = Radar.objects.all()
+    template = loader.get_template('technology_radar/index.html')
+    context = {
+        'radars': radars
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def radar_detail(request, pk):
+    radar = get_object_or_404(Radar, pk=pk)
+    template = loader.get_template('technology_radar/radar.html')
+    context = {
+        'radar': radar
+    }
+    return HttpResponse(template.render(context, request))
