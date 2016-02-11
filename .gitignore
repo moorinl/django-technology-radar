@@ -1,0 +1,31 @@
+# OS X files
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+env/
+lib/
+sdist/
+*.egg-info/
+*.egg
+
+# Translations
+*.mo
+*.po
+
+# Unit test / coverage reports
+.cache/
+.tox/
+.coverage
+coverage.xml
+
+# Django stuff
+*.sqlite3
