@@ -28,4 +28,4 @@ Add the following entries to ``MIDDLEWARE_CLASSES``:
 
 Add the following additions to your ``urls.py`` file:
 
-    url(r'', include('technology_radar.urls'))
+    url(r'', include('technology_radar.urls')),
