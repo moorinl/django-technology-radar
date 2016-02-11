@@ -37,10 +37,10 @@ class Radar(TimeStampedModel):
 
 class Blip(TimeStampedModel):
     area = models.CharField(max_length=32, choices=RADAR_AREAS)
-    radar = models.ForeignKey('Radar')
+    radar = models.ForeignKey('Radar', related_name='blips')
     status = models.CharField(max_length=16, choices=RADAR_STATUSSES)
     name = models.CharField(max_length=255)
-    boxy = models.TextField()
+    body = models.TextField()
     history = HistoricalRecords()
 
     def __unicode__(self):
