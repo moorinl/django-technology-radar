@@ -1,7 +1,10 @@
-all: install migrate run
+all: install migrate loaddata run
 
 install:
 	pip install -e .[test]
+
+loaddata:
+	python manage.py loaddata radar
 
 migrate:
 	python manage.py migrate

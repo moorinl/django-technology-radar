@@ -12,6 +12,7 @@ tests_require = [
     'pytest',
     'pytest-cov',
     'pytest-django',
+    'pytest-factoryboy',
     'tox'
 ]
 
