@@ -1,3 +1,5 @@
+from autoslug import AutoSlugField
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -30,6 +32,7 @@ class TimeStampedModel(models.Model):
 
 class Radar(TimeStampedModel):
     name = models.CharField(max_length=64)
+    slug = AutoSlugField(populate_from='name')
 
     def __unicode__(self):
         return self.name
@@ -40,6 +43,7 @@ class Blip(TimeStampedModel):
     radar = models.ForeignKey('Radar', related_name='blips')
     status = models.CharField(max_length=16, choices=RADAR_STATUSSES)
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='name')
     body = models.TextField()
     history = HistoricalRecords()
 
