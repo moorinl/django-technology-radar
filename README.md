@@ -1,6 +1,6 @@
 # Django Technology Radar
 
-[![Build Status](https://travis-ci.org/moorinteractive/django-technology-radar.svg?branch=master)](https://travis-ci.org/moorinteractive/django-technology-radar)
+[![Build Status](https://travis-ci.org/moorinteractive/django-technology-radar.svg?branch=master)](https://travis-ci.org/moorinteractive/django-technology-radar) [![Coverage Status](https://coveralls.io/repos/github/moorinteractive/django-technology-radar/badge.svg?branch=master)](https://coveralls.io/github/moorinteractive/django-technology-radar?branch=master)
 
 A Django app for building your own Technology Radar, inspired by [ThoughtWorks](https://www.thoughtworks.com/).
 
