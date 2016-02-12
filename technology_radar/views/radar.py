@@ -11,7 +11,7 @@ from technology_radar.serializers import BlipSerializer, RadarSerializer
 
 
 __all__ = ['ApiRadarListView', 'ApiRadarDetailView', 'ApiBlipListView',
-           'ApiBlipDetailView', 'index', 'radar_detail']
+           'ApiBlipDetailView', 'index', 'radar_detail', 'blip_detail']
 
 
 class ApiRadarListView(APIView):
@@ -51,10 +51,21 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-def radar_detail(request, pk):
-    radar = get_object_or_404(Radar, pk=pk)
+def radar_detail(request, radar):
+    radar = get_object_or_404(Radar, slug=radar)
     template = loader.get_template('technology_radar/radar.html')
     context = {
         'radar': radar
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def blip_detail(request, radar, blip):
+    radar = get_object_or_404(Radar, slug=radar)
+    blip = get_object_or_404(Blip, slug=blip)
+    template = loader.get_template('technology_radar/blip.html')
+    context = {
+        'radar': radar,
+        'blip': blip
     }
     return HttpResponse(template.render(context, request))

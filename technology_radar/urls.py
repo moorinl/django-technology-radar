@@ -5,8 +5,10 @@ from technology_radar import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^radars/(?P<pk>[0-9]+)/$', views.radar_detail,
+    url(r'^radars/(?P<radar>[\w-]+)/$', views.radar_detail,
         name='radar-detail'),
+    url(r'^radars/(?P<radar>[\w-]+)/(?P<blip>[\w-]+)/$', views.blip_detail,
+        name='blip-detail'),
     url(r'^api/$', views.ApiRootView.as_view(), name='api-root'),
     url(r'^api/radars/$', views.ApiRadarListView.as_view(),
         name='api-radar-list'),

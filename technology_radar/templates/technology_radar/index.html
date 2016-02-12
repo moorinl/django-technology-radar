@@ -5,7 +5,7 @@
 <ul>
     {% for radar in radars %}
     <li>
-        <a href="{% url 'radar-detail' radar.pk %}">{{ radar.name }}</a>
+        <a href="{% url 'radar-detail' radar.slug %}">{{ radar.name }}</a>
     </li>
     {% endfor %}
 </ul>
