@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.template import loader
 
@@ -52,20 +52,24 @@ def index(request):
 
 
 def radar_detail(request, radar):
-    radar = get_object_or_404(Radar, slug=radar)
+    radar_obj = get_object_or_404(Radar, slug=radar)
     template = loader.get_template('technology_radar/radar.html')
     context = {
-        'radar': radar
+        'radar': radar_obj
     }
     return HttpResponse(template.render(context, request))
 
 
-def blip_detail(request, radar, blip):
-    radar = get_object_or_404(Radar, slug=radar)
-    blip = get_object_or_404(Blip, slug=blip)
+def blip_detail(request, radar, area, blip):
+    blip_obj = get_object_or_404(Blip, slug=blip)
+    if area != blip_obj.area:
+        raise Http404
+    if blip_obj.radar.slug != radar:
+        raise Http404
+    radar_obj = get_object_or_404(Radar, slug=radar)
     template = loader.get_template('technology_radar/blip.html')
     context = {
-        'radar': radar,
-        'blip': blip
+        'radar': radar_obj,
+        'blip': blip_obj
     }
     return HttpResponse(template.render(context, request))
