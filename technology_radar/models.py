@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 
 from django.conf import settings
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
 from simple_history.models import HistoricalRecords
@@ -30,14 +31,16 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+@python_2_unicode_compatible
 class Radar(TimeStampedModel):
     name = models.CharField(max_length=64)
     slug = AutoSlugField(populate_from='name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class Blip(TimeStampedModel):
     area = models.CharField(max_length=32, choices=RADAR_AREAS)
     radar = models.ForeignKey('Radar', related_name='blips')
@@ -47,5 +50,5 @@ class Blip(TimeStampedModel):
     body = models.TextField()
     history = HistoricalRecords()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
