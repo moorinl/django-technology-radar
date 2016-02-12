@@ -8,13 +8,13 @@ from technology_radar.tests.factories import RadarFactory, BlipFactory
 @pytest.mark.django_db
 def test_radar():
     radar = RadarFactory()
-    assert unicode(radar) == 'Moor Interactive'
+    assert str(radar) == 'Moor Interactive'
 
 
 @pytest.mark.django_db
 def test_blip():
     blip = BlipFactory()
-    assert unicode(blip) == 'BEM'
+    assert str(blip) == 'BEM'
 
 
 @pytest.mark.django_db
