@@ -6,6 +6,18 @@ from technology_radar.tests.factories import RadarFactory, BlipFactory
 
 
 @pytest.mark.django_db
+def test_radar():
+    radar = RadarFactory()
+    assert unicode(radar) == 'Moor Interactive'
+
+
+@pytest.mark.django_db
+def test_blip():
+    blip = BlipFactory()
+    assert unicode(blip) == 'BEM'
+
+
+@pytest.mark.django_db
 def test_api_radar_list(client):
     res = client.get(reverse('api-radar-list'))
     assert res.status_code == 200
