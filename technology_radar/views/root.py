@@ -9,6 +9,10 @@ __all__ = ['ApiRootView']
 class ApiRootView(APIView):
     def get(self, request, format=None):
         return Response({
+            'area-list': reverse(
+                'api-area-list', request=request, format=format),
+            'status-list': reverse(
+                'api-status-list', request=request, format=format),
             'radar-list': reverse(
                 'api-radar-list', request=request, format=format),
             'blip-list': reverse(

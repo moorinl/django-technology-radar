@@ -1,6 +1,18 @@
 from rest_framework import serializers
 
-from technology_radar.models import Blip, Radar
+from technology_radar.models import Area, Status, Blip, Radar
+
+
+class AreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Area
+        fields = ('id', 'name', 'slug')
+
+
+class StatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = ('id', 'name', 'slug')
 
 
 class BlipSerializer(serializers.ModelSerializer):

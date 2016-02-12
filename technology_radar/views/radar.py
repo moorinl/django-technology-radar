@@ -6,13 +6,28 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-from technology_radar.models import RADAR_AREAS, Blip, Radar
-from technology_radar.serializers import BlipSerializer, RadarSerializer
+from technology_radar.models import Area, Status, Blip, Radar
+from technology_radar.serializers import (
+    AreaSerializer, StatusSerializer, BlipSerializer, RadarSerializer)
 
 
-__all__ = ['ApiRadarListView', 'ApiRadarDetailView', 'ApiBlipListView',
-           'ApiBlipDetailView', 'index', 'radar_detail', 'area_detail',
-           'blip_detail']
+__all__ = ['ApiAreaListView', 'ApiStatusListView', 'ApiRadarListView',
+           'ApiRadarDetailView', 'ApiBlipListView', 'ApiBlipDetailView',
+           'index', 'radar_detail', 'area_detail', 'blip_detail']
+
+
+class ApiAreaListView(APIView):
+    def get(self, request, format=None):
+        queryset = Area.objects.all()
+        serializer = AreaSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ApiStatusListView(APIView):
+    def get(self, request, format=None):
+        queryset = Status.objects.all()
+        serializer = StatusSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class ApiRadarListView(APIView):
@@ -62,14 +77,13 @@ def radar_detail(request, radar):
 
 
 def area_detail(request, radar, area):
-    if area not in dict(RADAR_AREAS):
-        raise Http404
     radar_obj = get_object_or_404(Radar, slug=radar)
-    blips = Blip.objects.filter(radar=radar_obj, area=area)
+    area_obj = get_object_or_404(Area, slug=area)
+    blips = Blip.objects.filter(radar=radar_obj, area=area_obj)
     template = loader.get_template('technology_radar/area.html')
     context = {
         'radar': radar_obj,
-        'area': dict(RADAR_AREAS).get(area),
+        'area': area_obj,
         'blips': blips
     }
     return HttpResponse(template.render(context, request))
@@ -77,8 +91,7 @@ def area_detail(request, radar, area):
 
 def blip_detail(request, radar, area, blip):
     blip_obj = get_object_or_404(Blip, slug=blip)
-    if area != blip_obj.area:
-        raise Http404
+    area_obj = get_object_or_404(Area, slug=area)  # noqa
     if blip_obj.radar.slug != radar:
         raise Http404
     radar_obj = get_object_or_404(Radar, slug=radar)
