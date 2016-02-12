@@ -6,12 +6,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-from technology_radar.models import Blip, Radar
+from technology_radar.models import RADAR_AREAS, Blip, Radar
 from technology_radar.serializers import BlipSerializer, RadarSerializer
 
 
 __all__ = ['ApiRadarListView', 'ApiRadarDetailView', 'ApiBlipListView',
-           'ApiBlipDetailView', 'index', 'radar_detail', 'blip_detail']
+           'ApiBlipDetailView', 'index', 'radar_detail', 'area_detail',
+           'blip_detail']
 
 
 class ApiRadarListView(APIView):
@@ -56,6 +57,20 @@ def radar_detail(request, radar):
     template = loader.get_template('technology_radar/radar.html')
     context = {
         'radar': radar_obj
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def area_detail(request, radar, area):
+    if area not in dict(RADAR_AREAS):
+        raise Http404
+    radar_obj = get_object_or_404(Radar, slug=radar)
+    blips = Blip.objects.filter(radar=radar_obj, area=area)
+    template = loader.get_template('technology_radar/area.html')
+    context = {
+        'radar': radar_obj,
+        'area': dict(RADAR_AREAS).get(area),
+        'blips': blips
     }
     return HttpResponse(template.render(context, request))
 

@@ -75,6 +75,41 @@ def test_radar_detail(client):
 
 
 @pytest.mark.django_db
+def test_area_detail(client):
+    radar = RadarFactory()
+    res = client.get(reverse('area-detail', kwargs={
+        'radar': 'moor-interactive',
+        'area': 'techniques'
+    }))
+    assert res.status_code == 200
+    res = client.get(reverse('area-detail', kwargs={
+        'radar': 'moor-interactive',
+        'area': 'tools'
+    }))
+    assert res.status_code == 200
+    res = client.get(reverse('area-detail', kwargs={
+        'radar': 'moor-interactive',
+        'area': 'platforms'
+    }))
+    assert res.status_code == 200
+    res = client.get(reverse('area-detail', kwargs={
+        'radar': 'moor-interactive',
+        'area': 'languages_frameworks'
+    }))
+    assert res.status_code == 200
+    res = client.get(reverse('area-detail', kwargs={
+        'radar': 'moor-interactiv',
+        'area': 'languages_frameworks'
+    }))
+    assert res.status_code == 404
+    res = client.get(reverse('area-detail', kwargs={
+        'radar': 'moor-interactive',
+        'area': 'languages_framework'
+    }))
+    assert res.status_code == 404
+
+
+@pytest.mark.django_db
 def test_blip_detail(client):
     blip = BlipFactory()
     res = client.get(reverse('blip-detail', kwargs={

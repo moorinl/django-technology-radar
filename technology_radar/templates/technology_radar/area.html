@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<h1>{{ radar.name }}</h1>
+<h2>{{ area }}</h2>
+{% if blips %}
+<ul>
+    {% for blip in blips %}
+    <li>
+        <a href="{% url 'blip-detail' radar.slug blip.area blip.slug %}">{{ blip.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>{% trans "No radar blips are available." %}</p>
+{% endif %}

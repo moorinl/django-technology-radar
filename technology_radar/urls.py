@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^radars/(?P<radar>[\w-]+)/$', views.radar_detail,
         name='radar-detail'),
+    url(r'^radars/(?P<radar>[\w-]+)/(?P<area>[\w-]+)/$', views.area_detail,
+        name='area-detail'),
     url(r'^radars/(?P<radar>[\w-]+)/(?P<area>[\w-]+)/(?P<blip>[\w-]+)/$',
         views.blip_detail, name='blip-detail'),
     url(r'^api/$', views.ApiRootView.as_view(), name='api-root'),
