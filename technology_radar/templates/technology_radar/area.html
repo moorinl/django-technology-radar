@@ -6,7 +6,7 @@
 <ul>
     {% for blip in blips %}
     <li>
-        <a href="{% url 'blip-detail' radar.slug blip.area blip.slug %}">{{ blip.name }}</a>
+        <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }}</a>
     </li>
     {% endfor %}
 </ul>

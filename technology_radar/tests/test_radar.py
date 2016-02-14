@@ -2,7 +2,20 @@ import pytest
 
 from django.core.urlresolvers import reverse
 
-from technology_radar.tests.factories import RadarFactory, BlipFactory
+from technology_radar.tests.factories import (
+    AreaFactory, StatusFactory, RadarFactory, BlipFactory)
+
+
+@pytest.mark.django_db
+def test_area():
+    radar = AreaFactory()
+    assert str(radar) == 'Tools'
+
+
+@pytest.mark.django_db
+def test_status():
+    radar = StatusFactory()
+    assert str(radar) == 'Access'
 
 
 @pytest.mark.django_db
@@ -15,6 +28,20 @@ def test_radar():
 def test_blip():
     blip = BlipFactory()
     assert str(blip) == 'BEM'
+
+
+@pytest.mark.django_db
+def test_api_area_list(client):
+    area = AreaFactory()
+    res = client.get(reverse('api-area-list'))
+    assert res.status_code == 200
+
+
+@pytest.mark.django_db
+def test_api_status_list(client):
+    status = StatusFactory()
+    res = client.get(reverse('api-status-list'))
+    assert res.status_code == 200
 
 
 @pytest.mark.django_db
@@ -76,35 +103,20 @@ def test_radar_detail(client):
 
 @pytest.mark.django_db
 def test_area_detail(client):
-    radar = RadarFactory()
-    res = client.get(reverse('area-detail', kwargs={
-        'radar': 'moor-interactive',
-        'area': 'techniques'
-    }))
-    assert res.status_code == 200
+    blip = BlipFactory()
     res = client.get(reverse('area-detail', kwargs={
         'radar': 'moor-interactive',
         'area': 'tools'
     }))
     assert res.status_code == 200
     res = client.get(reverse('area-detail', kwargs={
-        'radar': 'moor-interactive',
-        'area': 'platforms'
-    }))
-    assert res.status_code == 200
-    res = client.get(reverse('area-detail', kwargs={
-        'radar': 'moor-interactive',
-        'area': 'languages_frameworks'
-    }))
-    assert res.status_code == 200
-    res = client.get(reverse('area-detail', kwargs={
         'radar': 'moor-interactiv',
-        'area': 'languages_frameworks'
+        'area': 'tools'
     }))
     assert res.status_code == 404
     res = client.get(reverse('area-detail', kwargs={
         'radar': 'moor-interactive',
-        'area': 'languages_framework'
+        'area': 'tool'
     }))
     assert res.status_code == 404
 
@@ -114,32 +126,20 @@ def test_blip_detail(client):
     blip = BlipFactory()
     res = client.get(reverse('blip-detail', kwargs={
         'radar': 'moor-interactive',
-        'area': 'techniques',
+        'area': 'tools',
         'blip': 'bem'
     }))
     assert res.status_code == 200
     res = client.get(reverse('blip-detail', kwargs={
         'radar': 'moor-interactive',
-        'area': 'technique',
-        'blip': 'bem'
-    }))
-    assert res.status_code == 404
-    res = client.get(reverse('blip-detail', kwargs={
-        'radar': 'moor-interactiv',
-        'area': 'techniques',
-        'blip': 'bem'
-    }))
-    assert res.status_code == 404
-    res = client.get(reverse('blip-detail', kwargs={
-        'radar': 'moor-interactive',
-        'area': 'techniques',
+        'area': 'tools',
         'blip': 'be'
     }))
     assert res.status_code == 404
     radar = RadarFactory(name='Company')
     res = client.get(reverse('blip-detail', kwargs={
         'radar': 'company',
-        'area': 'techniques',
+        'area': 'tools',
         'blip': 'bem'
     }))
     assert res.status_code == 404
