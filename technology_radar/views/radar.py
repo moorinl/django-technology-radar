@@ -2,9 +2,10 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.template import loader
 
+from reportlab.pdfgen import canvas
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 
 from technology_radar.models import Area, Status, Blip, Radar
 from technology_radar.serializers import (
@@ -13,7 +14,8 @@ from technology_radar.serializers import (
 
 __all__ = ['ApiAreaListView', 'ApiStatusListView', 'ApiRadarListView',
            'ApiRadarDetailView', 'ApiBlipListView', 'ApiBlipDetailView',
-           'index', 'radar_detail', 'area_detail', 'blip_detail']
+           'index', 'radar_detail', 'radar_detail_pdf', 'area_detail',
+           'blip_detail']
 
 
 class ApiAreaListView(APIView):
@@ -74,6 +76,22 @@ def radar_detail(request, radar):
         'radar': radar_obj
     }
     return HttpResponse(template.render(context, request))
+
+
+def radar_detail_pdf(request, radar):
+    radar_obj = get_object_or_404(Radar, slug=radar)  # noqa
+
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="radar.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    pdf = canvas.Canvas(response)
+
+    # Close the PDF object cleanly, and we're done.
+    pdf.showPage()
+    pdf.save()
+    return response
 
 
 def area_detail(request, radar, area):
