@@ -31,6 +31,20 @@ def test_blip():
 
 
 @pytest.mark.django_db
+def test_api_area_list(client):
+    area = AreaFactory()
+    res = client.get(reverse('api-area-list'))
+    assert res.status_code == 200
+
+
+@pytest.mark.django_db
+def test_api_status_list(client):
+    status = StatusFactory()
+    res = client.get(reverse('api-status-list'))
+    assert res.status_code == 200
+
+
+@pytest.mark.django_db
 def test_api_radar_list(client):
     res = client.get(reverse('api-radar-list'))
     assert res.status_code == 200

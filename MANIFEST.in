@@ -1,2 +1,3 @@
 recursive-include technology_radar *.html
+recursive-include technology_radar *.json
 recursive-include technology_radar *.py
