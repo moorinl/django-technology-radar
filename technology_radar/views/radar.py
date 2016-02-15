@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.template import loader
@@ -5,15 +6,16 @@ from django.template import loader
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
 from technology_radar.models import Area, Status, Blip, Radar
 from technology_radar.serializers import (
     AreaSerializer, StatusSerializer, BlipSerializer, RadarSerializer)
+from technology_radar.utils import import_class
 
 
 __all__ = ['ApiAreaListView', 'ApiStatusListView', 'ApiRadarListView',
            'ApiRadarDetailView', 'ApiBlipListView', 'ApiBlipDetailView',
-           'index', 'radar_detail', 'area_detail', 'blip_detail']
+           'index', 'radar_detail', 'radar_detail_download', 'area_detail',
+           'blip_detail']
 
 
 class ApiAreaListView(APIView):
@@ -74,6 +76,14 @@ def radar_detail(request, radar):
         'radar': radar_obj
     }
     return HttpResponse(template.render(context, request))
+
+
+def radar_detail_download(request, radar):
+    radar_obj = get_object_or_404(Radar, slug=radar)
+    renderer = import_class(getattr(settings, 'TECHNOLOGY_RADAR_RENDER_CLASS',
+                            'technology_radar.renderers.PDFRenderer'))()
+    response = renderer.render(request, radar_obj)
+    return response
 
 
 def area_detail(request, radar, area):

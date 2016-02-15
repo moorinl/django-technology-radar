@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^radars/(?P<radar>[\w-]+)/$', views.radar_detail,
         name='radar-detail'),
+    url(r'^radars/(?P<radar>[\w-]+)/download/$', views.radar_detail_download,
+        name='radar-detail-download'),
     url(r'^radars/(?P<radar>[\w-]+)/(?P<area>[\w-]+)/$', views.area_detail,
         name='area-detail'),
     url(r'^radars/(?P<radar>[\w-]+)/(?P<area>[\w-]+)/(?P<blip>[\w-]+)/$',

@@ -5,7 +5,8 @@ install_requires = [
     'django>=1.9,<1.10',
     'django-simple-history>=1.8,<1.9',
     'django-autoslug>=1.9,<2.0',
-    'djangorestframework>=3.3,<3.4'
+    'djangorestframework>=3.3,<3.4',
+    'reportlab>=3.2,<3.3'
 ]
 
 tests_require = [

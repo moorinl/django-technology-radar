@@ -102,6 +102,24 @@ def test_radar_detail(client):
 
 
 @pytest.mark.django_db
+def test_radar_download(client, settings):
+    radar = RadarFactory()
+    res = client.get(reverse('radar-detail-download', kwargs={
+        'radar': 'moor-interactive'
+    }))
+    assert res.status_code == 200
+    res = client.get(reverse('radar-detail', kwargs={
+        'radar': 'moor-interactiv'
+    }))
+    assert res.status_code == 404
+    settings.TECHNOLOGY_RADAR_RENDER_CLASS = 'technology_radar.renderers.AbstractRenderer'
+    res = client.get(reverse('radar-detail-download', kwargs={
+        'radar': 'moor-interactive'
+    }))
+    assert res.status_code == 200
+
+
+@pytest.mark.django_db
 def test_area_detail(client):
     blip = BlipFactory()
     res = client.get(reverse('area-detail', kwargs={

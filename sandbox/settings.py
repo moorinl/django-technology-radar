@@ -79,3 +79,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ]
 }
+
+TECHNOLOGY_RADAR_RENDER_CLASS = 'technology_radar.renderers.PDFRenderer'
