@@ -102,7 +102,7 @@ def test_radar_detail(client):
 
 
 @pytest.mark.django_db
-def test_radar_download(client):
+def test_radar_download(client, settings):
     radar = RadarFactory()
     res = client.get(reverse('radar-detail-download', kwargs={
         'radar': 'moor-interactive'
@@ -112,6 +112,11 @@ def test_radar_download(client):
         'radar': 'moor-interactiv'
     }))
     assert res.status_code == 404
+    settings.TECHNOLOGY_RADAR_RENDER_CLASS = 'technology_radar.renderers.AbstractRenderer'
+    res = client.get(reverse('radar-detail-download', kwargs={
+        'radar': 'moor-interactive'
+    }))
+    assert res.status_code == 200
 
 
 @pytest.mark.django_db
