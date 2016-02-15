@@ -12,3 +12,6 @@
 {% else %}
 <p>{% trans "No radar blips are available." %}</p>
 {% endif %}
+<p>
+    <a href="{% url 'radar-detail-download' radar.slug %}">{% trans "Download" %}</a>
+</p>
