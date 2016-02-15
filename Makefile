@@ -1,6 +1,8 @@
 all: install migrate loaddata run
 
 install:
+	pip install .
+	pip install -e .[docs]
 	pip install -e .[test]
 
 loaddata:

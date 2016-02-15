@@ -8,7 +8,7 @@ A Django app for building your own Technology Radar, inspired by [ThoughtWorks](
 
 Install the ``technology_radar`` package from GitHub:
 
-    pip install git+git://github.com/moorinteractive/django-technology-radar.git
+    $ pip install git+git://github.com/moorinteractive/django-technology-radar.git
 
 This will also install it's dependencies.
 
@@ -23,6 +23,10 @@ In your settings file, add the following apps to ``INSTALLED_APPS``:
 Add the following entries to ``MIDDLEWARE_CLASSES``:
 
     'simple_history.middleware.HistoryRequestMiddleware',
+
+Choose a renderer class (default ``PDFRenderer):
+
+    TECHNOLOGY_RADAR_RENDER_CLASS = 'technology_radar.renderers.PDFRenderer'
 
 ### URL Configuration
 

@@ -9,7 +9,11 @@ install_requires = [
     'reportlab>=3.2,<3.3'
 ]
 
-tests_require = [
+docs_require = [
+    'sphinx'
+]
+
+test_require = [
     'flake8',
     'pytest',
     'pytest-cov',
@@ -23,9 +27,9 @@ setup(
     version='0.1.0',
     description='A Django app for building your own Technology Radar.',
     install_requires=install_requires,
-    tests_require=tests_require,
     extras_require={
-        'test': tests_require
+        'docs': docs_require,
+        'test': test_require
     },
     packages=find_packages(exclude=[
         '*tests',
