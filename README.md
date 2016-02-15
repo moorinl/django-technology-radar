@@ -24,7 +24,7 @@ Add the following entries to ``MIDDLEWARE_CLASSES``:
 
     'simple_history.middleware.HistoryRequestMiddleware',
 
-Choose a renderer class (default ``PDFRenderer):
+Choose a renderer class (default ``PDFRenderer``):
 
     TECHNOLOGY_RADAR_RENDER_CLASS = 'technology_radar.renderers.PDFRenderer'
 
