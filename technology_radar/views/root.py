@@ -3,10 +3,10 @@ from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 
 
-__all__ = ['ApiRootView']
+__all__ = ['RootView']
 
 
-class ApiRootView(APIView):
+class RootView(APIView):
     def get(self, request, format=None):
         return Response({
             'area-list': reverse(
