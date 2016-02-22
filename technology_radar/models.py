@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext as _
 
 from simple_history.models import HistoricalRecords
 
@@ -22,6 +23,10 @@ class Area(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('area')
+        verbose_name_plural = _('area\'s')
+
 
 @python_2_unicode_compatible
 class Status(models.Model):
@@ -31,6 +36,10 @@ class Status(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('status')
+        verbose_name_plural = _('statuses')
+
 
 @python_2_unicode_compatible
 class Radar(TimeStampedModel):
@@ -39,6 +48,10 @@ class Radar(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('radar')
+        verbose_name_plural = _('radars')
 
 
 class BlipManager(models.Manager):
@@ -62,3 +75,7 @@ class Blip(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('blip')
+        verbose_name_plural = _('blips')
