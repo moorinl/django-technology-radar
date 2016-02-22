@@ -17,6 +17,9 @@ sdist/
 *.egg-info/
 *.egg
 
+# Documentation
+docs/_build/
+
 # Translations
 *.mo
 *.po

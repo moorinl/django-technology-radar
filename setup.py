@@ -26,6 +26,8 @@ setup(
     name='django-technology-radar',
     version='0.1.0',
     description='A Django app for building your own Technology Radar.',
+    author='Rob Moorman',
+    author_email='rob@moori.nl',
     install_requires=install_requires,
     extras_require={
         'docs': docs_require,

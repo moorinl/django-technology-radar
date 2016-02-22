@@ -1,4 +1,9 @@
+.PHONY: docs
+
 all: install migrate loaddata run
+
+docs:
+	cd docs && make clean && make html
 
 install:
 	pip install .
