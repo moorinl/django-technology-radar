@@ -1,6 +1,6 @@
 # Django Technology Radar
 
-[![Build Status](https://travis-ci.org/moorinteractive/django-technology-radar.svg?branch=master)](https://travis-ci.org/moorinteractive/django-technology-radar) [![Coverage Status](https://coveralls.io/repos/github/moorinteractive/django-technology-radar/badge.svg?branch=master)](https://coveralls.io/github/moorinteractive/django-technology-radar?branch=master) [![Dependency Status](https://gemnasium.com/moorinteractive/django-technology-radar.svg)](https://gemnasium.com/moorinteractive/django-technology-radar) [![Documentation](http://django-technology-radar.readthedocs.org/)](http://django-technology-radar.readthedocs.org/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/moorinteractive/django-technology-radar.svg?branch=master)](https://travis-ci.org/moorinteractive/django-technology-radar) [![Coverage Status](https://coveralls.io/repos/github/moorinteractive/django-technology-radar/badge.svg?branch=master)](https://coveralls.io/github/moorinteractive/django-technology-radar?branch=master) [![Dependency Status](https://gemnasium.com/moorinteractive/django-technology-radar.svg)](https://gemnasium.com/moorinteractive/django-technology-radar) [![Documentation](https://readthedocs.org/projects/django-technology-radar/badge/?version=latest)](http://django-technology-radar.readthedocs.org/en/latest/?badge=latest)
 
 A Django app for building your own Technology Radar, inspired by [ThoughtWorks](https://www.thoughtworks.com/).
 
