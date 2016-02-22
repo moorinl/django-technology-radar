@@ -2,6 +2,7 @@ import pytest
 
 from django.core.urlresolvers import reverse
 
+from technology_radar.models import Blip
 from technology_radar.tests.factories import (
     AreaFactory, StatusFactory, RadarFactory, BlipFactory)
 
@@ -28,6 +29,20 @@ def test_radar():
 def test_blip():
     blip = BlipFactory()
     assert str(blip) == 'BEM'
+
+
+@pytest.mark.django_db
+def test_blip_manager_by_area():
+    blip = BlipFactory()
+    assert Blip.objects.by_area('tools').count() == 1
+    assert Blip.objects.by_area('toolz').count() == 0
+
+
+@pytest.mark.django_db
+def test_blip_manager_by_status():
+    blip = BlipFactory()
+    assert Blip.objects.by_status('access').count() == 1
+    assert Blip.objects.by_status('accezz').count() == 0
 
 
 @pytest.mark.django_db

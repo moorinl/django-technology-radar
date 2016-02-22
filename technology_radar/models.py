@@ -41,6 +41,14 @@ class Radar(TimeStampedModel):
         return self.name
 
 
+class BlipManager(models.Manager):
+    def by_area(self, area):
+        return self.filter(area__slug=area)
+
+    def by_status(self, status):
+        return self.filter(status__slug=status)
+
+
 @python_2_unicode_compatible
 class Blip(TimeStampedModel):
     area = models.ForeignKey('Area', related_name='blips')
@@ -50,6 +58,7 @@ class Blip(TimeStampedModel):
     slug = AutoSlugField(populate_from='name')
     body = models.TextField()
     history = HistoricalRecords()
+    objects = BlipManager()
 
     def __str__(self):
         return self.name
