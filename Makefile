@@ -15,4 +15,6 @@ run:
 	python manage.py runserver 0.0.0.0:8000
 
 test:
-	tox -e py27,flake8
+	tox -e py27-dj18
+	tox -e py27-dj19
+	tox -e flake8
