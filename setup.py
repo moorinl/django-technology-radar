@@ -6,7 +6,7 @@ install_requires = [
     'django-simple-history>=1.8,<1.9',
     'django-autoslug>=1.9,<2.0',
     'djangorestframework>=3.3,<3.4',
-    'reportlab>=3.2,<3.3'
+    'reportlab>=3.3,<3.4'
 ]
 
 docs_require = [
