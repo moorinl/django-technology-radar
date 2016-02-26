@@ -20,12 +20,12 @@ class Area(models.Model):
     name = models.CharField(max_length=64)
     slug = AutoSlugField(populate_from='name')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = _('area')
         verbose_name_plural = _('area\'s')
+
+    def __str__(self):
+        return self.name
 
 
 @python_2_unicode_compatible
@@ -33,12 +33,12 @@ class Status(models.Model):
     name = models.CharField(max_length=64)
     slug = AutoSlugField(populate_from='name')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = _('status')
         verbose_name_plural = _('statuses')
+
+    def __str__(self):
+        return self.name
 
 
 @python_2_unicode_compatible
@@ -46,12 +46,18 @@ class Radar(TimeStampedModel):
     name = models.CharField(max_length=64)
     slug = AutoSlugField(populate_from='name')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = _('radar')
         verbose_name_plural = _('radars')
+
+    def __str__(self):
+        return self.name
+
+    def get_blips_by_area(self, area):
+        return Blip.objects.by_area(area.slug).filter(radar=self)
+
+    def get_blips_by_status(self, status):
+        return Blip.objects.by_status(status.slug).filter(radar=self)
 
 
 class BlipManager(models.Manager):
@@ -73,9 +79,9 @@ class Blip(TimeStampedModel):
     history = HistoricalRecords()
     objects = BlipManager()
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = _('blip')
         verbose_name_plural = _('blips')
+
+    def __str__(self):
+        return self.name
