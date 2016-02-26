@@ -85,3 +85,7 @@ class Blip(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_new(self):
+        return self.history.count() == 0
