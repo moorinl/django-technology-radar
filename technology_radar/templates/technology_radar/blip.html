@@ -1,5 +1,20 @@
 {% load i18n %}
 
 <h1>{{ radar.name }}</h1>
-<h2>{{ blip.name }}</h2>
+<h2>{{ blip.name }} ({{ blip.status }}){% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</h2>
 <p>{{ blip.body }}</p>
+{% if not blip.is_new %}
+<h3>{% trans "History" %}</h3>
+<ul>
+    {% for blip in blip.history.all.reverse %}
+    <li>
+        <h4>{{ blip.status }}</h4>
+        <h5>{{ blip.modified }}</h5>
+        <p>{{ blip.body }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<p>
+    <a href="{% url 'radar-detail' blip.radar.slug %}">{% trans "Back to radar" %}</a>
+</p>
