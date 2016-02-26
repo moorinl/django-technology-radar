@@ -1,7 +1,7 @@
 {% load i18n %}
 
-<h1>{{ radar.name }}</h1>
-<h2>{{ blip.name }} ({{ blip.status }}){% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</h2>
+<h1>{{ blip.name }}</h1>
+<h2>{{ blip.status }}</h2>
 <p>{{ blip.body }}</p>
 {% if not blip.is_new %}
 <h3>{% trans "History" %}</h3>
