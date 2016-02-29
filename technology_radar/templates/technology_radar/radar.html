@@ -4,23 +4,16 @@
 
 {% block content %}
 <h1>{{ radar.name }}</h1>
-{% for area in areas %}
-<h2>{{ area.name }}</h2>
-{% get_radar_blips_by_area radar area as area_blips %}
-{% if area_blips %}
-<ol>
-    {% for blip in area_blips %}
+<p class="lead">{% trans "Select an area to explore" %}</p>
+<ul>
+    {% for area in areas %}
     <li>
-        <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }} ({{ blip.status }}){% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</a>
+        <a href="{% url 'area-detail' radar.slug area.slug %}">{{ area.name }}</a>
     </li>
     {% endfor %}
-</ol>
-{% else %}
-<p>{% trans "No blips are available." %}</p>
-{% endif %}
-{% endfor %}
+</ul>
 <p>
     <a href="{% url 'radar-index' %}" class="btn btn-default">{% trans "Back to overview" %}</a>
-    <a href="{% url 'radar-detail-download' radar.slug %}" class="btn btn-default">{% trans "Download" %}</a>
+    <a href="{% url 'radar-detail-download' radar.slug %}" class="btn btn-default">{% trans "Download radar" %}</a>
 </p>
 {% endblock %}
