@@ -20,7 +20,7 @@
 {% endif %}
 {% endfor %}
 <p>
-    <a href="{% url 'index' %}" class="btn btn-default">{% trans "Back to overview" %}</a>
+    <a href="{% url 'radar-index' %}" class="btn btn-default">{% trans "Back to overview" %}</a>
     <a href="{% url 'radar-detail-download' radar.slug %}" class="btn btn-default">{% trans "Download" %}</a>
 </p>
 {% endblock %}
