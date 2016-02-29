@@ -1,5 +1,8 @@
+{% extends "technology_radar/base.html" %}
+
 {% load i18n %}
 
+{% block content %}
 <h1>{{ blip.name }}</h1>
 <h2>{{ blip.status }}</h2>
 <p>{{ blip.body }}</p>
@@ -16,5 +19,6 @@
 </ul>
 {% endif %}
 <p>
-    <a href="{% url 'radar-detail' blip.radar.slug %}">{% trans "Back to radar" %}</a>
+    <a href="{% url 'radar-detail' blip.radar.slug %}" class="btn btn-default">{% trans "Back to radar" %}</a>
 </p>
+{% endblock %}

@@ -1,15 +1,22 @@
+{% extends "technology_radar/base.html" %}
+
 {% load i18n %}
 
+{% block content %}
 <h1>{{ radar.name }}</h1>
 <h2>{{ area }}</h2>
 {% if blips %}
 <ul>
     {% for blip in blips %}
     <li>
-        <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }}</a>
+        <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }} ({{ blip.status }}){% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</a>
     </li>
     {% endfor %}
 </ul>
 {% else %}
 <p>{% trans "No radar blips are available." %}</p>
 {% endif %}
+<p>
+    <a href="{% url 'radar-detail' radar.slug %}" class="btn btn-default">{% trans "Back to radar" %}</a>
+</p>
+{% endblock %}
