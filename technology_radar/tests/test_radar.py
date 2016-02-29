@@ -99,7 +99,7 @@ def test_api_blip_detail(client):
 
 @pytest.mark.django_db
 def test_index(client):
-    res = client.get(reverse('index'))
+    res = client.get(reverse('radar-index'))
     assert res.status_code == 200
 
 
