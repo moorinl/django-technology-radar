@@ -1,5 +1,8 @@
+{% extends "technology_radar/base.html" %}
+
 {% load i18n %}
 
+{% block content %}
 <h1>{% trans "Technology Radar" %}</h1>
 {% if radars %}
 <ul>
@@ -12,3 +15,4 @@
 {% else %}
 <p>{% trans "No radars are available." %}</p>
 {% endif %}
+{% endblock %}
