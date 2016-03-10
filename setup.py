@@ -28,6 +28,8 @@ setup(
     description='A Django app for building your own Technology Radar.',
     author='Rob Moorman',
     author_email='rob@moori.nl',
+    url='https://github.com/moorinteractive/django-technology-radar',
+    download_url='https://github.com/moorinteractive/django-technology-radar/tarball/0.1.0',
     install_requires=install_requires,
     extras_require={
         'docs': docs_require,
