@@ -12,7 +12,7 @@ See the [documentation](http://django-technology-radar.readthedocs.org/) for mor
 
 Install the ``technology_radar`` package from GitHub:
 
-    $ pip install git+git://github.com/moorinteractive/django-technology-radar.git
+    $ pip install django-technology-radar
 
 This will also install it's dependencies.
 
