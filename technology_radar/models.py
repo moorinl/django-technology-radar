@@ -21,6 +21,7 @@ class Area(models.Model):
     slug = AutoSlugField(populate_from='name')
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('area')
         verbose_name_plural = _('area\'s')
 
@@ -34,6 +35,7 @@ class Status(models.Model):
     slug = AutoSlugField(populate_from='name')
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('status')
         verbose_name_plural = _('statuses')
 
@@ -47,6 +49,7 @@ class Radar(TimeStampedModel):
     slug = AutoSlugField(populate_from='name')
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('radar')
         verbose_name_plural = _('radars')
 
@@ -80,6 +83,7 @@ class Blip(TimeStampedModel):
     objects = BlipManager()
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('blip')
         verbose_name_plural = _('blips')
 
