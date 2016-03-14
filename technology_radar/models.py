@@ -88,4 +88,4 @@ class Blip(TimeStampedModel):
 
     @property
     def is_new(self):
-        return self.history.count() == 0
+        return self.history.count() == 1
