@@ -16,7 +16,10 @@
 <ul>
     {% for blip in blips %}
     <li>
-        <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }} ({{ blip.status }}){% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</a>
+        <p>
+            <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }}</a> ({{ blip.status }}) {% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}<br />
+            <span class="date">{{ blip.modified }}</span>
+        </p>
     </li>
     {% endfor %}
 </ul>

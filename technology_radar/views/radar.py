@@ -34,23 +34,27 @@ def radar_detail(request, radar):
 
 def radar_blip_list(request, radar):
     radar_obj = get_object_or_404(Radar, slug=radar)
+    context = {}
     q = request.GET.get('q', None)
     is_valid = False
+    blips = radar_obj.blips.all()
     if q:
         form = SearchForm(request.GET)
         if form.is_valid():
             is_valid = True
+            blips = blips.filter(name__icontains=q)
+            context['q'] = q
             template = loader.get_template(
                 'technology_radar/radar_blip_list_results.html')
     else:
         form = SearchForm()
     if not is_valid:
         template = loader.get_template('technology_radar/radar_blip_list.html')
-    context = {
+    context.update({
         'form': form,
         'radar': radar_obj,
-        'blips': radar_obj.blips.all()
-    }
+        'blips': blips
+    })
     return HttpResponse(template.render(context, request))
 
 
