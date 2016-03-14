@@ -5,7 +5,8 @@ from django.template import loader
 
 from technology_radar.forms import SearchForm
 from technology_radar.models import Area, Blip, Radar
-from technology_radar.utils import import_class
+from technology_radar.utils import (convert_queryset_to_alphabetically_dict,
+                                    import_class)
 
 
 __all__ = ['index', 'radar_detail', 'radar_blip_list', 'radar_detail_download',
@@ -49,6 +50,7 @@ def radar_blip_list(request, radar):
     else:
         form = SearchForm()
     if not is_valid:
+        blips = convert_queryset_to_alphabetically_dict(blips)
         template = loader.get_template('technology_radar/radar_blip_list.html')
     context.update({
         'form': form,
