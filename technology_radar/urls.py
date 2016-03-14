@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^$', views.index, name='radar-index'),
     url(r'^(?P<radar>[\w-]+)/$', views.radar_detail,
         name='radar-detail'),
+    url(r'^(?P<radar>[\w-]+)/a-z/$', views.radar_blip_list,
+        name='radar-blip-list'),
     url(r'^(?P<radar>[\w-]+)/download/$', views.radar_detail_download,
         name='radar-detail-download'),
     url(r'^(?P<radar>[\w-]+)/(?P<area>[\w-]+)/$', views.area_detail,

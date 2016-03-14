@@ -17,5 +17,6 @@
     {% endif %}
 {% endfor %}
 <p>
+    <a href="{% url 'radar-blip-list' radar.slug %}">{% trans "Search A-Z" %}</a>
     <a href="{% url 'radar-detail-download' radar.slug %}">{% trans "Download" %}</a>
 </p>
