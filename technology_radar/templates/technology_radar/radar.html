@@ -1,20 +1,26 @@
 {% load i18n technology_radar_tags %}
 
+{% get_areas as areas %}
+{% get_statuses as statuses %}
+
 <h1>{{ radar.name }}</h1>
 {% for area in areas %}
     <h2>{{ area.name }}</h2>
-    {% get_radar_blips_by_area radar area as area_blips %}
-    {% if area_blips %}
+    {% for status in statuses %}
+    <h3>{{ status }}</h3>
+    {% get_radar_blips_by_area_status radar area.slug status.slug as blips %}
+    {% if blips %}
     <ul>
-        {% for blip in area_blips %}
+        {% for blip in blips %}
         <li>
-            <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }} ({{ blip.status }}){% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</a>
+            <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }} {% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}</a>
         </li>
         {% endfor %}
     </ul>
     {% else %}
     <p>{% trans "No blips are available." %}</p>
     {% endif %}
+    {% endfor %}
 {% endfor %}
 <p>
     <a href="{% url 'radar-blip-list' radar.slug %}">{% trans "Search A-Z" %}</a>

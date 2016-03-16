@@ -56,11 +56,8 @@ class Radar(TimeStampedModel):
     def __str__(self):
         return self.name
 
-    def get_blips_by_area(self, area):
-        return Blip.objects.by_area(area.slug).filter(radar=self)
-
-    def get_blips_by_status(self, status):
-        return Blip.objects.by_status(status.slug).filter(radar=self)
+    def get_blips_by_area_status(self, area, status):
+        return self.blips.filter(area__slug=area, status__slug=status)
 
 
 class BlipManager(models.Manager):

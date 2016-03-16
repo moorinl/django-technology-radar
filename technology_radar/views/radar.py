@@ -24,11 +24,9 @@ def index(request):
 
 def radar_detail(request, radar):
     radar_obj = get_object_or_404(Radar, slug=radar)
-    areas = Area.objects.all()
     template = loader.get_template('technology_radar/radar.html')
     context = {
-        'radar': radar_obj,
-        'areas': areas
+        'radar': radar_obj
     }
     return HttpResponse(template.render(context, request))
 
