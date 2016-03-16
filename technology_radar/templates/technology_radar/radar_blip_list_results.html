@@ -1,0 +1,18 @@
+{% load i18n technology_radar_tags %}
+
+<h1>{{ radar.name }}</h1>
+<h2>{% trans "Search results for" %} {{ q }}</h2>
+{% if blips %}
+<ul>
+    {% for blip in blips %}
+    <li>
+        <p>
+            <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }}</a> ({{ blip.status }}) {% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}<br />
+            <span class="date">{{ blip.modified }}</span>
+        </p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>{% trans "No blips are available." %}</p>
+{% endif %}

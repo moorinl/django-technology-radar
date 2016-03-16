@@ -1,0 +1,35 @@
+{% load i18n technology_radar_tags %}
+
+<h1>{{ radar.name }}</h1>
+<form action="{% url 'radar-blip-list' radar.slug %}" method="GET">
+    {% if form.q.errors %}
+    <p>
+        {% for error in form.q.errors %}
+        {{ error }}
+        {% endfor %}
+    </p>
+    {% endif %}
+    {{ form.q }}
+    <input type="submit" value="{% trans "Search" %}" />
+</form>
+{% if blips %}
+<div>
+    {% for char,char_blips in blips.items %}
+    {% if char_blips %}
+    <h2>{{ char }}</h2>
+    <ul>
+        {% for blip in char_blips %}
+        <li>
+            <p>
+                <a href="{% url 'blip-detail' radar.slug blip.area.slug blip.slug %}">{{ blip.name }}</a> ({{ blip.status }}) {% if blip.is_new %} <span class="badge">{% trans "new" %}</span>{% endif %}<br />
+                <span class="date">{{ blip.modified }}</span>
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<p>{% trans "No blips are available." %}</p>
+{% endif %}
