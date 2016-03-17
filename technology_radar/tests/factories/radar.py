@@ -11,7 +11,7 @@ class AreaFactory(factory.DjangoModelFactory):
 
 
 class StatusFactory(factory.DjangoModelFactory):
-    name = 'Access'
+    name = 'Assess'
 
     class Meta:
         model = models.Status

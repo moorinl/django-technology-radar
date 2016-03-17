@@ -16,7 +16,7 @@ def test_area():
 @pytest.mark.django_db
 def test_status():
     radar = StatusFactory()
-    assert str(radar) == 'Access'
+    assert str(radar) == 'Assess'
 
 
 @pytest.mark.django_db
@@ -41,8 +41,8 @@ def test_blip_manager_by_area():
 @pytest.mark.django_db
 def test_blip_manager_by_status():
     blip = BlipFactory()
-    assert Blip.objects.by_status('access').count() == 1
-    assert Blip.objects.by_status('accezz').count() == 0
+    assert Blip.objects.by_status('assess').count() == 1
+    assert Blip.objects.by_status('assezz').count() == 0
 
 
 @pytest.mark.django_db
